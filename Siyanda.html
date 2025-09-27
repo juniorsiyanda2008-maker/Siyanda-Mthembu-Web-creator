@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Siyanda Mthembu Junior | Web Creator</title>
+  <style>
+    body { margin:0; font-family: Arial, sans-serif; line-height:1.6; scroll-behavior: smooth; color:#333; }
+    a { text-decoration:none; color:inherit; }
+    section { padding:80px 20px; }
+    h1,h2,h3,h4 { margin-bottom:20px; }
+    .container { max-width:1200px; margin:0 auto; }
+
+    /* Navbar */
+    nav { position:fixed; top:0; width:100%; background:linear-gradient(to right,#7e5bef,#1fb6ff); color:white; display:flex; justify-content:space-between; align-items:center; padding:20px 40px; z-index:1000; }
+    nav ul { display:flex; list-style:none; gap:30px; }
+    nav ul li a:hover { color:#ffdd57; transition:0.3s; }
+
+    /* Hero */
+    .hero { min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; background:linear-gradient(to bottom,#000,#222); color:white; padding-top:80px; }
+    .hero img { border-radius:50%; border:4px solid #ffdd57; width:250px; height:250px; object-fit:cover; margin-bottom:20px; opacity:0; animation:fadeIn 2s forwards; }
+    .hero h1 { font-size:3em; margin-bottom:20px; opacity:0; animation:fadeIn 2s 0.5s forwards; }
+    .hero p { font-size:1.2em; max-width:600px; margin:auto; opacity:0; animation:fadeIn 2s 1s forwards; }
+    .hero a { display:inline-block; margin-top:20px; padding:15px 30px; background:#ffdd57; color:black; font-weight:bold; border-radius:5px; transition:0.3s; }
+    .hero a:hover { background:#ffd633; }
+
+    /* Services */
+    .services { background:#f4f4f4; text-align:center; }
+    .service-item { display:inline-block; background:white; padding:20px; margin:10px; border-radius:10px; width:250px; transition:0.3s; opacity:0; animation:fadeIn 1.5s forwards; }
+    .service-item:hover { transform:scale(1.05); }
+
+  /* Contact */
+    .contact { background:#222; color:white; text-align:center; }
+    .contact form { max-width:400px; margin:auto; display:flex; flex-direction:column; gap:15px; }
+    .contact input, .contact textarea { padding:10px; border-radius:5px; border:none; }
+    .contact button { padding:10px; border:none; border-radius:5px; background:#ffdd57; color:black; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .contact button:hover { background:#ffd633; }
+
+    /* Footer */
+    footer { background:linear-gradient(to right,#7e5bef,#1fb6ff); color:white; text-align:center; padding:20px; }
+
+    /* Animations */
+    @keyframes fadeIn { to { opacity:1; } }
+
+    /* Responsive */
+    @media(max-width:768px){ .service-item, .portfolio-item { width:80%; } }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav>
+    <h1>Siyanda Mthembu Junior</h1>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <img src="hero.jpg" alt="Siyanda Mthembu Junior">
+    <h1>Hi, I'm Siyanda Mthembu Junior</h1>
+    <p>I create modern, responsive, and professional websites for businesses, freelancers, and local brands. Let me help you take your business online!</p>
+    <a href="#contact">Hire Me</a>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <h2>About Me</h2>
+      <p>I am Siyanda Mthembu Junior, a passionate website creator. I specialize in building responsive, animated, and SEO-friendly websites for small businesses and entrepreneurs. I use modern design trends to help your brand look professional and attract more customers.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services">
+    <h2>Services</h2>
+    <div class="service-item">Business Websites<br>Professional websites for businesses and shops.</div>
+    <div class="service-item">Portfolio Websites<br>Showcase your work as an artist, DJ, or freelancer.</div>
+    <div class="service-item">Landing Pages<br>High-converting pages for products, promotions, or campaigns.</div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact">
+    <h2>Contact Me</h2>
+    <p>📞 Call/WhatsApp: 27655515142</p>
+    <form id="contact-form">
+      <input type="text" name="from_name" placeholder="Your Name" required>
+      <input type="email" name="reply_to" placeholder="Your Email" required>
+      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+    <p id="thankyou" style="display:none;color:#ffdd57;">Thanks! Your message has been sent.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Siyanda Mthembu Junior. All rights reserved.
+  </footer>
+
+  <!-- Animations on scroll -->
+  <script>
+    const faders = document.querySelectorAll('.service-item, .portfolio-item');
+    const appearOptions = { threshold: 0.2, rootMargin: "0px 0px -50px 0px" };
+    const appearOnScroll = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting) return;
+        entry.target.style.opacity = 1;
+        observer.unobserve(entry.target);
+      });
+    }, appearOptions);
+    faders.forEach(fader => { appearOnScroll.observe(fader); });
+  </script>
+
+  <!-- EmailJS Integration -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("template_dw74pk"); // <-- Replace with your User/Public Key
+    })();
+
+    const form = document.getElementById('contact-form');
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      emailjs.sendForm('service_58pxo3k', 'e_F-BhaCayLs-rvQc', this)
+        .then(function() {
+          document.getElementById('thankyou').style.display = 'block';
+          form.reset();
+        }, function(error) {
+          alert('Oops! Something went wrong...', error);
+        });
+    });
+  </script>
+</body>
+</html>
